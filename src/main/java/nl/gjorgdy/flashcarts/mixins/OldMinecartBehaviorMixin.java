@@ -128,6 +128,10 @@ public abstract class OldMinecartBehaviorMixin extends MinecartBehavior implemen
 			case ASCENDING_NORTH, ASCENDING_EAST -> -45F;
 			default -> 0F;
 		};
+		if (this.lastStep != null) {
+			var deltaYRot = this.lastStep.yRot() - yRot;
+			if (deltaYRot % 180 == 0) yRot = this.lastStep.yRot();
+		}
 		if (this.lastStep != null && this.lastStep.xRot() != 0f && this.lastStep.xRot() != xRot) {
 			xRot = 0f;
 		}
