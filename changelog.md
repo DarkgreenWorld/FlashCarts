@@ -1,4 +1,4 @@
-﻿Standing Here, I Realize
+﻿Speed Cubed
 ---
 
-- Fixed multiple bugs causing minecarts with old physics to move sporadically when they're supposed to stand still.
+- Updated the mod to 26.2: Chaos Cubed
