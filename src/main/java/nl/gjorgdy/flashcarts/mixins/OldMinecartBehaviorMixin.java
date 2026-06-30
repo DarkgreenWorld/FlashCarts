@@ -46,7 +46,7 @@ public abstract class OldMinecartBehaviorMixin extends MinecartBehavior implemen
 		this.steps.clear();
 		if (lastStep != null) {
 			this.steps.add(
-				new NewMinecartBehavior.MinecartStep(lastStep.position(), lastStep.movement(), lastStep.yRot(), lastStep.xRot(), 0.0f)
+				new NewMinecartBehavior.MinecartStep(lastStep.position(), stopped ? Vec3.ZERO : lastStep.movement(), lastStep.yRot(), lastStep.xRot(), 0.0f)
 			);
 			this.lastStep = lastStep;
 		}
