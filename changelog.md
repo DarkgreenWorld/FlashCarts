@@ -1,6 +1,4 @@
-﻿Desync Bugfix
+﻿Standing Here, I Realize
 ---
 
-- Altered the way update suppression works to prevent minecarts not moving for some players 
-- Fixed a bug where a minecart kept playing its 'driving' sound when it was stationary
-- Fixed the rotation of minecarts using old physics on placement
+- Fixed multiple bugs causing minecarts with old physics to move sporadically when they're supposed to stand still.
