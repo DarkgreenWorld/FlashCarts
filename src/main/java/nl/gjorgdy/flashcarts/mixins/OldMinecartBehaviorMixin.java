@@ -108,12 +108,13 @@ public abstract class OldMinecartBehaviorMixin extends MinecartBehavior implemen
 		// vertical rotation
 		float xRot = 0f;
 		if (minecart.isOnRails()) {
-			if (movement.y > 0.01) {
-				xRot = 45f;
-			} else if (movement.y < -0.01) {
-				xRot = -45f;
+			if (movement.y > 0.1) {
+				xRot = minecart.isFlipped() ? -45f : 45f;
+			} else if (movement.y < -0.1) {
+				xRot = minecart.isFlipped() ? 45f : -45f;
+			} else if (movement.y != 0 && lastStep != null) {
+				xRot = lastStep.xRot();
 			}
-			xRot *= minecart.isFlipped() ? -1.0F : 1.0F;
 		}
 
 		return new NewMinecartBehavior.MinecartStep(
