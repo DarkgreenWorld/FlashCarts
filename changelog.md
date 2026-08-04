@@ -1,4 +1,5 @@
-﻿Speed Cubed
+﻿Stay on Track
 ---
 
-- Updated the mod to 26.2: Chaos Cubed
+- Fixed minecarts de-syncing when going off the rails.
+- Improved minecarts sync when standing still (preventing the de-sync flashes and weird wobbling)
