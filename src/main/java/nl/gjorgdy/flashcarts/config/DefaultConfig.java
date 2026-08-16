@@ -178,4 +178,8 @@ public class DefaultConfig implements IConfig {
 		return default_haltSpeedMultiplier;
 	}
 
+	@Override
+	public boolean shouldSmartHalt() {
+		return default_smartHaltEnabled;
+	}
 }

@@ -149,6 +149,11 @@ public class FzzyConfig extends Config implements IConfig {
 	}
 
 	@Override
+	public boolean shouldSmartHalt() {
+		return true; // TODO config val
+	}
+
+	@Override
 	public IBuildConfig getBuildConfig() {
 		return buildTools;
 	}

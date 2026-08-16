@@ -22,6 +22,7 @@ public interface IConfig {
 	float default_poweredRailBoostPercentage = 0.12f;
 	double default_haltSpeedThreshold = 0.05;
 	double default_haltSpeedMultiplier = 0.3;
+	boolean default_smartHaltEnabled = true;
 
 	boolean default_emptyUseExperimentalPhysics = true;
 	int default_emptyMaxSpeed = 8;
@@ -79,6 +80,12 @@ public interface IConfig {
 	 * @return the multiplier applied to speed when a minecart is being halted.
 	 */
 	double getHaltSpeedMultiplier();
+
+	/**
+	 * Whether to enable smart halting (minecarts halt based on the length of powered rails).
+	 * @return if smart halt enabled
+	 */
+	boolean shouldSmartHalt();
 
 	/**
 	 * Get the configuration for building tools.
