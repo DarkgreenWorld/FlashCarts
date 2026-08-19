@@ -8,7 +8,10 @@ import net.minecraft.world.entity.vehicle.minecart.AbstractMinecart;
 import net.minecraft.world.entity.vehicle.minecart.MinecartBehavior;
 import net.minecraft.world.entity.vehicle.minecart.NewMinecartBehavior;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.level.block.PoweredRailBlock;
+import net.minecraft.world.level.block.RailBlock;
+import net.minecraft.world.level.block.RailState;
+import net.minecraft.world.level.block.state.properties.RailShape;
 import nl.gjorgdy.flashcarts.Flashcarts;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.*;
@@ -54,48 +57,50 @@ public abstract class NewMinecartBehaviorMixin extends MinecartBehavior {
 		if (!Flashcarts.config.shouldSmartHalt()) return Flashcarts.config.getHaltSpeedMultiplier();
 
 		var movement = this.minecart.getDeltaMovement();
-		var velocity = movement.length();
+		var velocity = Math.abs(movement.x) + Math.abs(movement.z);
 		var position = this.minecart.position();
 
+		if (movement.y > 0) return 0;
+
 		Direction direction;
-		if (movement.z < 0) {
-			direction = Direction.NORTH;
-		} else if (movement.z > 0) {
-			direction = Direction.SOUTH;
-		} else if (movement.x < 0) {
-			direction = Direction.WEST;
+		if (Math.abs(movement.x) >= Math.abs(movement.z)) {
+			direction = movement.x < 0 ? Direction.WEST : Direction.EAST;
 		} else {
-			direction = Direction.EAST;
+			direction = movement.z < 0 ? Direction.NORTH : Direction.SOUTH;
 		}
 
 		var _pos = this.minecart.blockPosition();
+		var _endPos = this.minecart.blockPosition();
 		for (int i = 0; i < 8; i++) {
 			var state = this.minecart.level().getBlockState(_pos);
-			var below = _pos.below();
-			var stateBelow = this.minecart.level().getBlockState(below);
-
+			var stateBelow = this.minecart.level().getBlockState(_pos.below());
 			if (state.is(Blocks.POWERED_RAIL)) {
-				continue;
+				_endPos = _pos;
+				if (state.getValue(PoweredRailBlock.SHAPE).isSlope()) {
+					break;
+				}
 			} else if (stateBelow.is(Blocks.POWERED_RAIL)) {
-				_pos = below;
-			} else {
-				double distance;
-				if (direction == Direction.NORTH || direction == Direction.SOUTH) {
-					distance = Math.abs(_pos.getZ() - position.z) - 0.25;
-				} else {
-					distance = Math.abs(_pos.getX() - position.x) - 0.25;
+				_endPos = _pos;
+				if (stateBelow.getValue(PoweredRailBlock.SHAPE).isSlope()) {
+					break;
 				}
-				if (movement.y != 0) {
-					distance -= 0.25;
-				}
-				double velocityTarget = Flashcarts.config.getHaltSpeedThreshold();
-				double deceleration = ((velocity * velocity) - (velocityTarget * velocityTarget)) / (2 * distance);
-				return 1 - (deceleration / velocity);
-			}
+			} else break;
 			_pos = _pos.relative(direction, 1);
 		}
 
-		return Flashcarts.config.getHaltSpeedMultiplier();
+		double remainingDistance;
+		if (direction == Direction.NORTH || direction == Direction.SOUTH) {
+			remainingDistance = Math.abs((_endPos.getZ() + 0.5) - position.z);
+		} else {
+			remainingDistance = Math.abs((_endPos.getX() + 0.5) - position.x);
+		}
+
+		if (remainingDistance <= 0.01) return 0;
+
+		var time = remainingDistance / velocity;
+		var deceleration = velocity  / (2 * remainingDistance);
+		var multiplier = time < 1 ? time : 1 - (deceleration);
+		return Math.clamp(multiplier, 0.001, 0.99);
 	}
 
 }
