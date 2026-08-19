@@ -17,6 +17,11 @@ Because of this, the mod only applies the new physics where you would benefit fr
 
 By default, the new physics are applied to normal and TNT minecarts, but not to chest, furnace, or hopper minecarts.
 
+#### Smart Halting
+Slowing down minecarts can become inconsistent pretty quickly with the speeds made possible by this mod.
+To account for this, it also adds 'smart halting' which will intelligently stop a cart at the end of a line of
+unpowered rails or at the top of a unpowered slope.
+
 ![A normal minecraft using a different physics system than a chest minecart](https://cdn.modrinth.com/data/cached_images/a6e3345ce1fde6c5247d474b99ef5c1601e25499.webp)
 
 ### Building tools
