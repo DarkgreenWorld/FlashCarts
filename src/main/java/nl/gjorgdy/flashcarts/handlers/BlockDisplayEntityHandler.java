@@ -4,14 +4,15 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.network.protocol.game.*;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EntitySpawnReason;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.PositionMoveRotation;
+import net.minecraft.world.entity.EntityTypes;
+//import net.minecraft.world.entity.PositionMoveRotation;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.Objects;
 import java.util.UUID;
 import java.util.stream.IntStream;
+import net.minecraft.world.entity.PositionPath;
 
 public class BlockDisplayEntityHandler {
 
@@ -54,13 +55,13 @@ public class BlockDisplayEntityHandler {
 
     /**
      * Adds a block display entity for the given block state and position, with an optional glow color.
-     * @param blockState the block state to display
-     * @param pos the position to display the block at
-     * @param color the glow color to use for the block display entity, or -1 to disable glow
-     * @return the entity ID of the added block display entity, or -1 if the entity could not be created
+     * @param blockState the block state to display.
+     * @param pos the position to display the block at.
+     * @param color the glow color to use for the block display entity, or -1 to disable glow.
+     * @return the entity ID of the added block display entity, or -1 if the entity could not be created.
      */
     public int add(BlockState blockState, BlockPos pos, int color) {
-        var displayEntity = EntityType.BLOCK_DISPLAY.create(
+        var displayEntity = EntityTypes.BLOCK_DISPLAY.create(
                 player.level(),
                 EntitySpawnReason.COMMAND
         );
@@ -86,7 +87,9 @@ public class BlockDisplayEntityHandler {
             player.connection.send(
                 new ClientboundEntityPositionSyncPacket(
                     displayEntity.getId(),
-                    PositionMoveRotation.of(displayEntity),
+                    PositionPath.of(displayEntity.position()),
+                    displayEntity.getXRot(),
+					displayEntity.getYRot(),
                     true
                 )
             );

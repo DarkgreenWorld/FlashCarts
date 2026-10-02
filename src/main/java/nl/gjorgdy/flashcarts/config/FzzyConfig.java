@@ -46,6 +46,9 @@ public class FzzyConfig extends Config implements IConfig {
 	@Comment("Multiplier applied to speed when minecart is considered halted, vanilla: 0.5")
 	private ValidatedDouble haltSpeedMultiplier = new ValidatedDouble(default_haltSpeedMultiplier, 0.9, 0.1, ValidatedNumber.WidgetType.SLIDER);
 
+	@Comment("Whether to enable smart halting, which will make minecarts brake depending on the length of unpowered rails, vanilla: false")
+	private boolean enableSmartHalt = default_smartHaltEnabled;
+
 	@Comment("Configuration for building tools")
 	private FzzyBuildConfig buildTools = new FzzyBuildConfig();
 
@@ -146,6 +149,11 @@ public class FzzyConfig extends Config implements IConfig {
 	@Override
 	public double getHaltSpeedMultiplier() {
 		return haltSpeedMultiplier.get();
+	}
+
+	@Override
+	public boolean shouldSmartHalt() {
+		return enableSmartHalt;
 	}
 
 	@Override

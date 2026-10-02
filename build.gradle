@@ -1,6 +1,6 @@
 plugins {
     id "com.modrinth.minotaur" version "2.+"
-    id 'fabric-loom' version "${loom_version}"
+    id 'net.fabricmc.fabric-loom' version "${loom_version}"
 }
 
 var min_minecraft_version = project.minecraft_versions.split(',').first()
@@ -20,16 +20,18 @@ repositories {
         name = "FzzyMaven"
         url = "https://maven.fzzyhmstrs.me/"
     }
+    maven {
+        name = "Terraformers"
+        url = "https://maven.terraformersmc.com/"
+    }
 }
 
 dependencies {
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
-    mappings loom.officialMojangMappings()
-    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
-
-    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-
-    modImplementation "me.fzzyhmstrs:fzzy_config:${project.fzzy_config_version}"
+    implementation "net.fabricmc:fabric-loader:${project.loader_version}"
+    implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+    // Fzzy Config
+    implementation "me.fzzyhmstrs:fzzy_config:${project.fzzy_config_version}"
 }
 
 processResources {
@@ -41,16 +43,15 @@ processResources {
     filesMatching("fabric.mod.json") {
         expand "version": project.version,
                 "minecraft_version": project.minecraft_version,
-                "loader_version": project.loader_version
+                "loader_version": project.loader_version,
+                "fzzy_config_version": project.fzzy_config_version
     }
 }
 
-def targetJavaVersion = 21
+def targetJavaVersion = 25
 tasks.withType(JavaCompile).configureEach {
     it.options.encoding = "UTF-8"
-    if (targetJavaVersion >= 10 || JavaVersion.current().isJava10Compatible()) {
-        it.options.release.set(targetJavaVersion)
-    }
+    it.options.release.set(targetJavaVersion)
 }
 
 java {
@@ -67,7 +68,7 @@ jar {
     }
 }
 
-static String getModrinthToken() {
+/*static String getModrinthToken() {
     return new File('.env')
             .readLines()
             .findAll { it?.trim() && !it.trim().startsWith('#') }
@@ -85,10 +86,10 @@ modrinth {
     changelog = rootProject.file("changelog.md").text
     syncBodyFrom = rootProject.file("README.md").text
     versionType = project.mod_release_type
-    uploadFile = remapJar
+    uploadFile = jar
     gameVersions = project.minecraft_versions.split(',') as List<String>
     loaders = ["fabric"]
     dependencies {
         optional.version "fzzy-config", project.fzzy_config_version
     }
-}
+}*/

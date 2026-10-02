@@ -9,10 +9,8 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseRailBlock;
-import net.minecraft.world.level.block.state.properties.RailShape;
 import net.minecraft.world.phys.BlockHitResult;
 import nl.gjorgdy.flashcarts.Flashcarts;
 import nl.gjorgdy.flashcarts.interfaces.ISelectionHolder;
@@ -20,6 +18,7 @@ import nl.gjorgdy.flashcarts.utils.ItemUtils;
 import nl.gjorgdy.flashcarts.utils.PlayerUtils;
 import nl.gjorgdy.flashcarts.utils.RailUtils;
 import org.jspecify.annotations.NonNull;
+import net.minecraft.world.item.component.SwingAnimation;
 
 public class UseBlockCallbackListener implements UseBlockCallback {
 
@@ -45,7 +44,7 @@ public class UseBlockCallbackListener implements UseBlockCallback {
                 var blockPos = blockHit.getBlockPos();
                 var blockState = level.getBlockState(blockPos);
                 if (player instanceof ServerPlayer serverPlayer && RailUtils.place(serverPlayer, itemStack, blockState, blockPos)) {
-                    player.swing(interactionHand, true);
+                    player.swing(interactionHand, SwingAnimation.DEFAULT, true);
                     return InteractionResult.SUCCESS;
                 }
             }
@@ -55,7 +54,7 @@ public class UseBlockCallbackListener implements UseBlockCallback {
             if (player instanceof ISelectionHolder selectionHolder && selectionHolder.flashCarts$isStartPointSet()) {
                 if (player.isCrouching()) {
                     clear(player, selectionHolder);
-                    player.swing(interactionHand, true);
+                    player.swing(interactionHand, SwingAnimation.DEFAULT, true);
                     return InteractionResult.SUCCESS;
                 }
                 return buildSelection(player, selectionHolder, level, interactionHand, blockHit);
@@ -66,8 +65,8 @@ public class UseBlockCallbackListener implements UseBlockCallback {
 
     private static InteractionResult buildSelection(@NonNull Player player, ISelectionHolder selectionHolder, @NonNull Level level, @NonNull InteractionHand interactionHand, @NonNull BlockHitResult blockHit) {
         if (selectionHolder.flashCarts$getStartPointLevel() != level) {
-            player.displayClientMessage(Component.literal("§cNo valid rail path found!"), true);
-            player.swing(interactionHand, true);
+            player.sendOverlayMessage(Component.literal("§cNo valid rail path found!"));
+            player.swing(interactionHand, SwingAnimation.DEFAULT, true);
             return InteractionResult.FAIL;
         }
         var startPos = selectionHolder.flashCarts$getStartPointPos();
@@ -79,8 +78,8 @@ public class UseBlockCallbackListener implements UseBlockCallback {
         var path = RailUtils.getRailPath(level, startPos, endPos);
 
         if (!path.isValid()) {
-            player.displayClientMessage(Component.literal("§cNo valid rail path found!"), true);
-            player.swing(interactionHand, true);
+            player.sendOverlayMessage(Component.literal("§cNo valid rail path found!"));
+            player.swing(interactionHand, SwingAnimation.DEFAULT, true);
             return InteractionResult.FAIL;
         } else {
             int i = 0;
@@ -100,7 +99,7 @@ public class UseBlockCallbackListener implements UseBlockCallback {
 
         if (player instanceof ServerPlayer splayer) {
             PlayerUtils.playDirectSound(splayer, SoundEvents.UI_BUTTON_CLICK.value(), SoundSource.BLOCKS);
-            splayer.swing(interactionHand);
+            splayer.swing(interactionHand, SwingAnimation.DEFAULT, true);
         }
         selectionHolder.flashCarts$clearStartPoint();
         return InteractionResult.SUCCESS;
@@ -110,9 +109,9 @@ public class UseBlockCallbackListener implements UseBlockCallback {
         if (player instanceof ISelectionHolder selectionHolder) {
             selectionHolder.flashCarts$setStartPoint(blockPos, level);
             if (player instanceof ServerPlayer splayer) {
-                splayer.displayClientMessage(Component.literal("§aStart point set, place a rail to build"), true);
+                splayer.sendOverlayMessage(Component.literal("§aStart point set, place a rail to build"));
                 PlayerUtils.playDirectSound(splayer, SoundEvents.UI_BUTTON_CLICK.value(), SoundSource.BLOCKS);
-                splayer.swing(InteractionHand.MAIN_HAND);
+                splayer.swing(InteractionHand.MAIN_HAND, SwingAnimation.DEFAULT, true);
             }
         }
     }
@@ -120,9 +119,9 @@ public class UseBlockCallbackListener implements UseBlockCallback {
     private static void clear(Player player, ISelectionHolder selectionHolder) {
         selectionHolder.flashCarts$clearStartPoint();
         if (player instanceof ServerPlayer splayer) {
-            splayer.displayClientMessage(Component.literal("§6Cleared selection"), true);
+            splayer.sendOverlayMessage(Component.literal("§6Cleared selection"));
             PlayerUtils.playDirectSound(splayer, SoundEvents.UI_BUTTON_CLICK.value(), SoundSource.BLOCKS);
-            splayer.swing(InteractionHand.MAIN_HAND);
+            splayer.swing(InteractionHand.MAIN_HAND, SwingAnimation.DEFAULT, true);
         }
     }
 

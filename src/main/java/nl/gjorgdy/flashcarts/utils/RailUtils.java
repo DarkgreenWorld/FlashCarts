@@ -21,14 +21,16 @@ import org.jspecify.annotations.Nullable;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 public abstract class RailUtils {
 
     public static boolean place(ServerPlayer player, ItemStack railItem, BlockState blockState, BlockPos pos) {
         Level world = player.level();
-        RailShape shape = getRailShape(blockState);
+        var shape = getRailShape(blockState);
+        if (shape.isEmpty()) return false;
         var playerDirection = player.getDirection();
-        boolean xAxisRails = isXAxis(shape);
+        boolean xAxisRails = isXAxis(shape.get());
         boolean xAxisPlayer = (playerDirection == Direction.EAST) || (playerDirection == Direction.WEST);
         return xAxisRails == xAxisPlayer &&
                 forward(world, player, playerDirection.getUnitVec3i(), railItem, pos, xAxisRails, 8, false);
@@ -55,7 +57,8 @@ public abstract class RailUtils {
             depth++;
         }
         // if rails and on same axis
-        if (_blockState.getBlock() instanceof BaseRailBlock && isXAxis(getRailShape(_blockState)) == xAxisRails) {
+        var shape = getRailShape(_blockState);
+        if (_blockState.getBlock() instanceof BaseRailBlock && shape.isPresent() && isXAxis(shape.get()) == xAxisRails) {
             pos = pos.offset(vec);
             movedVertically = false;
         }
@@ -75,7 +78,7 @@ public abstract class RailUtils {
             step = new Vec3i(0, 0, Integer.signum(endPos.getZ() - startPos.getZ()));
         }
         var path = new LinkedList<Vec3i>();
-        var currentPos = new BlockPos(startPos);
+        var currentPos = new BlockPos(startPos.getX(), startPos.getY(), startPos.getZ());
         var _step = new Vec3i(step.getX(), step.getY(), step.getZ());
         while (!currentPos.equals(endPos)) {
             currentPos = currentPos.offset(step);
@@ -144,10 +147,6 @@ public abstract class RailUtils {
         return blockState.getBlock() instanceof BaseRailBlock;
     }
 
-    public static boolean isSlope(BlockState blockState) {
-        return isRail(blockState) && getRailShape(blockState).isSlope();
-    }
-
     private static boolean canBePlaced(Level level, BlockPos pos) {
         if (Blocks.RAIL instanceof BaseRailBlockInvoker invoker) {
             return level.getBlockState(pos).canBeReplaced()
@@ -156,16 +155,24 @@ public abstract class RailUtils {
         return false;
     }
 
-    public static boolean isXAxis(BlockState blockState) {
-        return isRail(blockState) && isXAxis(getRailShape(blockState));
-    }
-
     private static boolean isXAxis(RailShape shape) {
         return (shape == RailShape.EAST_WEST) || (shape == RailShape.ASCENDING_EAST) || (shape == RailShape.ASCENDING_WEST);
     }
 
-    public static RailShape getRailShape(BlockState state) {
-        return state.getValueOrElse(PoweredRailBlock.SHAPE, state.getValueOrElse(RailBlock.SHAPE, RailShape.NORTH_SOUTH));
+    public static Optional<RailShape> getRailShape(BlockState state) {
+        try {
+            var poweredShape = state.getValue(PoweredRailBlock.SHAPE);
+            return Optional.of(poweredShape);
+        } catch(IllegalArgumentException _) {
+            //ignored
+        }
+        try {
+            var shape = state.getValue(RailBlock.SHAPE);
+            return Optional.of(shape);
+        } catch(IllegalArgumentException _) {
+            //ignored
+        }
+        return Optional.empty();
     }
 
     public static BlockState getBlockState(int poweredRailFrequency, int i, Item heldItem, RailShape shape) {

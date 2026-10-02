@@ -1,14 +1,10 @@
 package nl.gjorgdy.flashcarts.mixins;
 
 import net.minecraft.network.chat.Component;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntitySelector;
-import net.minecraft.world.entity.vehicle.minecart.AbstractMinecart;
 import net.minecraft.world.entity.vehicle.minecart.Minecart;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.Vec3;
 import nl.gjorgdy.flashcarts.Flashcarts;
 import nl.gjorgdy.flashcarts.utils.TitleUtils;
 import org.jspecify.annotations.Nullable;
@@ -19,7 +15,11 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.util.List;
+//import net.minecraft.server.level.ServerLevel;
+//import net.minecraft.world.entity.EntitySelector;
+//import net.minecraft.world.entity.vehicle.minecart.AbstractMinecart;
+//import net.minecraft.world.phys.Vec3;
+//import java.util.List;
 
 @Mixin(Entity.class)
 public abstract class EntityMixin {
@@ -46,6 +46,7 @@ public abstract class EntityMixin {
 		}
 	}
 
+/*
 	@Inject(method = "setOnGroundWithMovement(ZZLnet/minecraft/world/phys/Vec3;)V", at = @At("HEAD"))
 	public void onPush(boolean bl, boolean horizontalCollision, Vec3 vec3, CallbackInfo ci) {
 		if (level().isClientSide() || !horizontalCollision) return;
@@ -73,5 +74,5 @@ public abstract class EntityMixin {
 			}
 		}
 	}
-
+*/
 }

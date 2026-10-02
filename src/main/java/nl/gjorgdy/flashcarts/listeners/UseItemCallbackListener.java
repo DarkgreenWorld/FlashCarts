@@ -12,6 +12,7 @@ import net.minecraft.world.level.Level;
 import nl.gjorgdy.flashcarts.interfaces.ISelectionHolder;
 import nl.gjorgdy.flashcarts.utils.PlayerUtils;
 import org.jspecify.annotations.NonNull;
+import net.minecraft.world.item.component.SwingAnimation;
 
 public class UseItemCallbackListener implements UseItemCallback {
 
@@ -20,7 +21,7 @@ public class UseItemCallbackListener implements UseItemCallback {
         if (player instanceof ISelectionHolder selectionHolder) {
             if (selectionHolder.flashCarts$getStartPointPos() != null) {
                 clear(player, selectionHolder);
-                player.swing(hand, true);
+                player.swing(hand, SwingAnimation.DEFAULT, true);
                 return InteractionResult.SUCCESS;
             }
         }
@@ -30,9 +31,9 @@ public class UseItemCallbackListener implements UseItemCallback {
     private static void clear(Player player, ISelectionHolder selectionHolder) {
         selectionHolder.flashCarts$clearStartPoint();
         if (player instanceof ServerPlayer splayer) {
-            splayer.displayClientMessage(Component.literal("§6Cleared selection"), true);
+            splayer.sendOverlayMessage(Component.literal("§6Cleared selection"));
             PlayerUtils.playDirectSound(splayer, SoundEvents.UI_BUTTON_CLICK.value(), SoundSource.BLOCKS);
-            splayer.swing(InteractionHand.MAIN_HAND);
+            splayer.swing(InteractionHand.MAIN_HAND, SwingAnimation.DEFAULT, true);
         }
     }
 

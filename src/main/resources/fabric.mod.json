@@ -21,5 +21,8 @@
     "fabricloader": ">=${loader_version}",
     "fabric-api": "*",
     "minecraft": "${minecraft_version}"
+  },
+  "suggests": {
+    "fzzy-config": ">=${fzzy_config_version}"
   }
 }

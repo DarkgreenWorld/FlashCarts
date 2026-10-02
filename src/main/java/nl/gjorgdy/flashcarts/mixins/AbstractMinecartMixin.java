@@ -37,8 +37,7 @@ public abstract class AbstractMinecartMixin extends VehicleEntity {
 
 	@WrapOperation(method = "<init>(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/level/Level;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/vehicle/minecart/AbstractMinecart;useExperimentalMovement(Lnet/minecraft/world/level/Level;)Z"))
 	private boolean initWithCorrectBehavior(Level level, Operation<Boolean> original) {
-		var cartConfig = Flashcarts.config.getConfigForMinecart(self);
-		return cartConfig != null && cartConfig.shouldUseExperimentalPhysics();
+		return true;
 	}
 
 	@Inject(method = "<init>(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/level/Level;)V", at= @At("RETURN"))
