@@ -1,6 +1,7 @@
 package com.darkgreen_world.flashcarts.listeners;
 
 import net.fabricmc.fabric.api.event.player.UseItemCallback;
+import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
@@ -31,7 +32,7 @@ public class UseItemCallbackListener implements UseItemCallback {
     private static void clear(Player player, ISelectionHolder selectionHolder) {
         selectionHolder.flashCarts$clearStartPoint();
         if (player instanceof ServerPlayer splayer) {
-            splayer.sendOverlayMessage(Component.literal("§6Cleared selection"));
+            splayer.sendOverlayMessage(Component.translatable("flash_carts.message.selection_cleared").withStyle(ChatFormatting.GOLD));
             PlayerUtils.playDirectSound(splayer, SoundEvents.UI_BUTTON_CLICK.value(), SoundSource.BLOCKS);
             splayer.swing(InteractionHand.MAIN_HAND, SwingAnimation.DEFAULT, true);
         }

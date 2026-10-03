@@ -12,6 +12,7 @@
     "EntityMixin",
     "NewMinecartBehaviorMixin",
     "OldMinecartBehaviorMixin",
+    "ServerCommonPacketListenerImplMixin",
     "ServerConfigurationPacketListenerImplMixin",
     "ServerEntityMixin",
     "ServerPlayerMixin",

@@ -39,7 +39,7 @@ public class UseBlockCallbackListener implements UseBlockCallback {
                         return buildSelection(player, selectionHolder, level, interactionHand, blockHit);
                     }
                 }
-                // rail extension
+            // rail extension
             } else if (Flashcarts.config.getBuildConfig().isRailExtendBuildingEnabled()) {
                 var itemStack = player.getItemInHand(interactionHand);
                 var blockPos = blockHit.getBlockPos();
@@ -90,8 +90,8 @@ public class UseBlockCallbackListener implements UseBlockCallback {
                 pos = pos.offset(vec);
                 i += vec.getX() + vec.getZ();
                 var rail = RailUtils.getBlockItem(
-                        prf, i,
-                        player.getItemInHand(interactionHand).getItem()
+                    prf, i,
+                    player.getItemInHand(interactionHand).getItem()
                 );
                 boolean placed = ItemUtils.place(rail, player, pos, SoundEvents.METAL_PLACE);
                 if (!placed) break;

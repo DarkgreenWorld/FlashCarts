@@ -32,6 +32,8 @@ public class ExpressTorchHandler extends ElementHolder {
 
     private static final Identifier ID = Identifier.fromNamespaceAndPath(Flashcarts.MOD_ID, "express_torch");
 
+    // Position of the torch base in minecart model space, where x points towards the rear and y points up.
+    private static final Vector3f POSITION = new Vector3f(0.5625f, 0.25f, 0f);
     // Keeps the torch stem within the two pixel thick cart wall, so that only the head is visible.
     private static final Vector3f SCALE = new Vector3f(0.8f, 1f, 0.8f);
     // Display entities pitch around their x axis, whereas minecarts pitch around their z axis.
@@ -141,10 +143,9 @@ public class ExpressTorchHandler extends ElementHolder {
         torch.setYaw(90f - yRot);
         torch.setPitch(-xRot);
         float pitch = -xRot * Mth.DEG_TO_RAD;
-        // Position of the torch base in minecart model space, where x points towards the rear and y points up.
         // The display rides above the minecart pivot, so the offset is corrected for the current pitch.
         torch.setTranslation(
-            new Vector3f(flipped ? -0.5625f : 0.5625f, 0.25f, 0f)
+            new Vector3f(flipped ? -POSITION.x : POSITION.x, POSITION.y, POSITION.z)
                 .sub(0.5f * SCALE.x, 0f, 0.5f * SCALE.z)
                 .rotate(ROTATION)
                 .sub(0f, RIDE_HEIGHT * Mth.cos(pitch), -RIDE_HEIGHT * Mth.sin(pitch))

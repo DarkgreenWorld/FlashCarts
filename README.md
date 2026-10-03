@@ -5,6 +5,8 @@
 
 <br>
 
+# Flash Carts Overhaul
+
 ## About
 
 The primary goal of this mod is to make minecarts better without breaking your Redstone.
@@ -16,6 +18,10 @@ These experimental physics allow for a lot higher speeds, but do often break red
 Because of this, the mod only applies the new physics where you would benefit from the higher speeds.
 
 By default, the new physics are applied to normal and TNT minecarts, but not to chest, furnace, or hopper minecarts.
+
+Alternatively, you can enable the Express Minecart crafting recipe in the config file. 
+They are crafted using one redstone torch and any regular minecart, and always have experimental physics enabled. 
+You can then disable experimental physics for regular minecarts.
 
 #### Smart Halting
 Slowing down minecarts can become inconsistent pretty quickly with the speeds made possible by this mod.
@@ -49,12 +55,6 @@ Any extra lines on the sign will be combined into the subtitle under the station
 
 ![The title of a station and the sign making it possible](https://cdn.modrinth.com/data/cached_images/5d2e65d81feb46b33a9353666fa8cbd58d773066_0.webp)
 
-### Minecart 'Crashes'
-
-To deal with people leaving minecarts hanging around, a minecart with a passenger will cause colliding empty minecarts to break without affecting its own speed.
-
-![A minecart with a player in it crashing through a still standing cart](https://cdn.modrinth.com/data/cached_images/85e0f26b6f6961d62f10626db0c169a489a84f76.webp)
-
 ### Rail recipes
 
 To make building railways a bit more do-able early game, Flash Carts adds some alternative recipes for rails like being able to use Copper instead of Gold for Powered Rails.
@@ -65,10 +65,13 @@ To make building railways a bit more do-able early game, Flash Carts adds some a
 
 ## Configuration
 
-On its own, the mod will not create a config file.
-To change settings, you can install [Fzzy Config](https://modrinth.com/mod/fzzy-config).
+Use `/flashcarts config` to open the configuration screen in-game.
 
-To load changes to the config file, you can use the vanilla ``/reload`` command.
+In addition, you can also open the configuration screen via the Mod Menu, 
+but only if you are in a singleplayer world with cheats enabled or on a server where you have operator permissions.
+
+If you have directly edited the configuration file, 
+to load changes to the config file, you can use the vanilla ``/reload`` command.
 
 ```toml
 cheaperRecipes = true

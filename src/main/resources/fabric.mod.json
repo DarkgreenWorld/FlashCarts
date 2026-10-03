@@ -2,16 +2,20 @@
   "schemaVersion": 1,
   "id": "flash_carts",
   "version": "${version}",
-  "name": "Flash Carts",
-  "description": "",
-  "authors": [],
+  "name": "Flash Carts Overhaul",
+  "description": "The primary goal of this mod is to make minecarts better without breaking your Redstone.",
+  "authors": ["Darkgreen_World","Claude Opus 5.5","gjorgdy"],
+  "contributors": ["UtmostStar"],
   "contact": {},
-  "license": "All-Rights-Reserved",
+  "license": "GPL-v3",
   "icon": "assets/flashcarts/icon.png",
   "environment": "*",
   "entrypoints": {
     "main": [
       "com.darkgreen_world.flashcarts.Flashcarts"
+    ],
+    "modmenu": [
+      "com.darkgreen_world.flashcarts.client.ModMenuIntegration"
     ]
   },
   "mixins": [
@@ -23,8 +27,5 @@
     "polymer-virtual-entity": "*",
     "server_translations_api": "*",
     "minecraft": "${minecraft_version}"
-  },
-  "suggests": {
-    "fzzy-config": ">=${fzzy_config_version}"
   }
 }

@@ -20,21 +20,21 @@ public interface IConfig {
 	boolean default_railExtendBuildingEnabled = false;
 	int default_railExtendBuildingMaxDistance = 16;
 
-	float default_poweredRailBoostPercentage = 0.12f;
-	double default_haltSpeedThreshold = 0.05;
-	double default_haltSpeedMultiplier = 0.3;
+	float default_poweredRailBoostPercentage = 0.06f;
+	double default_haltSpeedThreshold = 0.03;
+	double default_haltSpeedMultiplier = 0.5;
 	boolean default_smartHaltEnabled = true;
 
 	boolean default_expressRecipes = false;
 
 	boolean default_emptyUseExperimentalPhysics = true;
-	int default_emptyMaxSpeed = 8;
+	int default_emptyMaxSpeed = 32;
 
 	boolean default_mobUseExperimentalPhysics = true;
-	int default_mobMaxSpeed = 8;
+	int default_mobMaxSpeed = 32;
 
 	boolean default_playerUseExperimentalPhysics = true;
-	int default_playerMaxSpeed = 64;
+	int default_playerMaxSpeed = 32;
 
 	boolean default_tntUseExperimentalPhysics = true;
 	int default_tntMaxSpeed = 32;
@@ -160,24 +160,32 @@ public interface IConfig {
 		}
 		if (minecart instanceof MinecartChest) return getChestMinecartConfig();
 		if (minecart instanceof MinecartHopper) return getHopperMinecartConfig();
-		if (minecart instanceof MinecartFurnace) {
-			var furnaceConfig = getFurnaceMinecartConfig();
-			return new ICartConfig() {
-				@Override
-				public boolean shouldUseExperimentalPhysics() {
-					return furnaceConfig.shouldUseExperimentalPhysics();
-				}
-				// Compensates for vanilla halving the maximum speed of furnace minecarts.
-				@Override
-				public int getMaxSpeed() {
-					return furnaceConfig.getMaxSpeed() * 2;
-				}
-			};
-		}
+		if (minecart instanceof MinecartFurnace) return compensateFurnaceMaxSpeed(getFurnaceMinecartConfig());
 		if (minecart instanceof MinecartCommandBlock) return getCommandBlockMinecartConfig();
 		return null;
 	}
 
+	/**
+	 * Vanilla halves the maximum speed of furnace minecarts, so the configured speed is doubled to compensate.
+	 */
+	private static ICartConfig compensateFurnaceMaxSpeed(ICartConfig furnaceConfig) {
+		return new ICartConfig() {
+			@Override
+			public boolean shouldUseExperimentalPhysics() {
+				return furnaceConfig.shouldUseExperimentalPhysics();
+			}
+
+			@Override
+			public int getMaxSpeed() {
+				return furnaceConfig.getMaxSpeed() * 2;
+			}
+		};
+	}
+
+	/**
+	 * Whether the minecart should use experimental physics. Express minecarts always do,
+	 * other minecarts follow the setting of their kind.
+	 */
 	default boolean shouldUseExperimentalPhysics(AbstractMinecart minecart) {
 		if (ExpressUtils.isExpress(minecart)) return true;
 		var cartConfig = getConfigForMinecart(minecart);

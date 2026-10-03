@@ -65,11 +65,11 @@ public abstract class AbstractMinecartMixin extends VehicleEntity {
 					if (speedBar) {
 						int bars = (int) Math.floor(speed / Flashcarts.config.getPlayerMinecartConfig().getMaxSpeed() * 10);
 						stringBuilder
-								.append("§a").repeat("▮", Math.min(bars, 6))
-								.append("§e").repeat("▮", Math.clamp(bars - 6, 0, 2))
-								.append("§6").repeat("▮", Math.clamp(bars - 8, 0, 1))
-								.append("§c").repeat("▮", Math.clamp(bars - 9, 0, 1))
-								.append("§7").repeat("▮", 10 - bars);
+							.append("§a").repeat("▮", Math.min(bars, 6))
+							.append("§e").repeat("▮", Math.clamp(bars - 6, 0, 2))
+							.append("§6").repeat("▮", Math.clamp(bars - 8, 0, 1))
+							.append("§c").repeat("▮", Math.clamp(bars - 9, 0, 1))
+							.append("§7").repeat("▮", 10 - bars);
 					}
 					if (stationTitle && standingStill) {
 						TitleUtils.clearTitle(player, false);

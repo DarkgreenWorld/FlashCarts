@@ -16,15 +16,16 @@ base {
 }
 
 repositories {
-    maven {
-        name = "FzzyMaven"
-        url = "https://maven.fzzyhmstrs.me/"
-    }
+    //maven {
+    //    name = "FzzyMaven"
+    //    url = "https://maven.fzzyhmstrs.me/"
+    //}
     maven {
         name = "Terraformers"
         url = "https://maven.terraformersmc.com/"
     }
     maven { url = "https://maven.nucleoid.xyz" }
+    maven { url = "https://api.modrinth.com/maven"; content { includeGroup "maven.modrinth" } }
 }
 
 dependencies {
@@ -32,9 +33,11 @@ dependencies {
     implementation "net.fabricmc:fabric-loader:${project.loader_version}"
     implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
     // Fzzy Config
-    implementation "me.fzzyhmstrs:fzzy_config:${project.fzzy_config_version}"
+    //implementation "me.fzzyhmstrs:fzzy_config:${project.fzzy_config_version}"
     implementation include("eu.pb4:polymer-virtual-entity:0.18.2+26.3")
     implementation include("xyz.nucleoid:server-translations-api:3.2.0+26.3")
+    compileOnly "maven.modrinth:modmenu:21.0.0"
+    localRuntime "maven.modrinth:modmenu:21.0.0"
 }
 
 processResources {
@@ -46,8 +49,8 @@ processResources {
     filesMatching("fabric.mod.json") {
         expand "version": project.version,
                 "minecraft_version": project.minecraft_version,
-                "loader_version": project.loader_version,
-                "fzzy_config_version": project.fzzy_config_version
+                "loader_version": project.loader_version
+                //"fzzy_config_version": project.fzzy_config_version
     }
 }
 
