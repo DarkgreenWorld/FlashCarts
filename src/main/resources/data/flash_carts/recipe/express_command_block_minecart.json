@@ -1,0 +1,34 @@
+{
+  "fabric:load_conditions": [
+    {
+      "condition": "flash_carts:config",
+      "option": "express_recipes"
+    }
+  ],
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "minecraft:command_block_minecart",
+    "minecraft:redstone_torch"
+  ],
+  "result": {
+    "id": "minecraft:command_block_minecart",
+    "components": {
+      "minecraft:entity_data": {
+        "id": "minecraft:command_block_minecart",
+        "Tags": [
+          "flash_carts.express"
+        ]
+      },
+      "minecraft:enchantment_glint_override": true,
+      "minecraft:item_name": {
+        "translate": "item.flash_carts.express",
+        "with": [
+          {
+            "translate": "item.minecraft.command_block_minecart"
+          }
+        ]
+      }
+    }
+  }
+}

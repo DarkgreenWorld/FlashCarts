@@ -1,0 +1,7 @@
+{
+  "item.flash_carts.express": "Express %s",
+  "flash_carts.message.no_rail_path": "No valid rail path found!",
+  "flash_carts.message.start_point_set": "Start point set, place a rail to build",
+  "flash_carts.message.selection_cleared": "Cleared selection",
+  "flash_carts.speedometer": " %s b/s"
+}

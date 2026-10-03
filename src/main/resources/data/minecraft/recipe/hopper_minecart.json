@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "minecraft:hopper",
+    {
+      "fabric:type": "fabric:difference",
+      "base": "minecraft:minecart",
+      "subtracted": {
+        "fabric:type": "fabric:components",
+        "base": "minecraft:minecart",
+        "components": {
+          "minecraft:entity_data": {
+            "id": "minecraft:minecart",
+            "Tags": [
+              "flash_carts.express"
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "result": {
+    "id": "minecraft:hopper_minecart"
+  }
+}

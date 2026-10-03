@@ -24,6 +24,7 @@ repositories {
         name = "Terraformers"
         url = "https://maven.terraformersmc.com/"
     }
+    maven { url = "https://maven.nucleoid.xyz" }
 }
 
 dependencies {
@@ -32,6 +33,8 @@ dependencies {
     implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
     // Fzzy Config
     implementation "me.fzzyhmstrs:fzzy_config:${project.fzzy_config_version}"
+    implementation include("eu.pb4:polymer-virtual-entity:0.18.2+26.3")
+    implementation include("xyz.nucleoid:server-translations-api:3.2.0+26.3")
 }
 
 processResources {

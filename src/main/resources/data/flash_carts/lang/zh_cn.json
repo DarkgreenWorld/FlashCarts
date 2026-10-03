@@ -1,0 +1,7 @@
+{
+  "item.flash_carts.express": "特快%s",
+  "flash_carts.message.no_rail_path": "找不到可用的铁轨路径！",
+  "flash_carts.message.start_point_set": "已设置起点，放置铁轨即可铺设",
+  "flash_carts.message.selection_cleared": "已清除选区",
+  "flash_carts.speedometer": " %s 格/秒"
+}

@@ -11,7 +11,7 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "nl.gjorgdy.flashcarts.Flashcarts"
+      "com.darkgreen_world.flashcarts.Flashcarts"
     ]
   },
   "mixins": [
@@ -20,6 +20,8 @@
   "depends": {
     "fabricloader": ">=${loader_version}",
     "fabric-api": "*",
+    "polymer-virtual-entity": "*",
+    "server_translations_api": "*",
     "minecraft": "${minecraft_version}"
   },
   "suggests": {
