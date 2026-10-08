@@ -1,4 +1,4 @@
-!\[A player in a minecart going very fast](https://cdn.modrinth.com/data/cached\_images/aa5139a381dfdf9e1ec2797f88542852935573f1.webp)
+[![A player in a minecart going very fast](https://cdn.modrinth.com/data/cached\_images/aa5139a381dfdf9e1ec2797f88542852935573f1.webp)]
 
 <center>
   Minecarts are arguably the best transport in Minecraft, but they can be better
@@ -17,8 +17,8 @@
 
 #### The Link of Original Flash Carts
 
-[!\[Modrinth](https://img.shields.io/badge/Flash%20Carts-Modrinth-1bd96a?logo=modrinth\&logoColor=bluegreen)](https://modrinth.com/mod/flash-carts)
-[!\[GitHub](https://img.shields.io/badge/%E2%80%8B-GitHub-gray?logo=github\&logoColor=black\&labelColor=white)](https://github.com/gjorgdy/FlashCarts)
+[![Modrinth](https://img.shields.io/badge/Flash%20Carts-Modrinth-1bd96a?logo=modrinth\&logoColor=bluegreen)](https://modrinth.com/mod/flash-carts)
+[![GitHub](https://img.shields.io/badge/%E2%80%8B-GitHub-gray?logo=github\&logoColor=black\&labelColor=white)](https://github.com/gjorgdy/FlashCarts)
 
 The primary goal of this mod is to make minecarts better without breaking your Redstone.
 
