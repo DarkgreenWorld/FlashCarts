@@ -1,4 +1,4 @@
-[![A player in a minecart going very fast](https://cdn.modrinth.com/data/cached\_images/aa5139a381dfdf9e1ec2797f88542852935573f1.webp)]
+![A player in a minecart going very fast](https://cdn.modrinth.com/data/cached\_images/aa5139a381dfdf9e1ec2797f88542852935573f1.webp)
 
 <center>
   Minecarts are arguably the best transport in Minecraft, but they can be better
