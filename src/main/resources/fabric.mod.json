@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "id": "flash_carts",
   "version": "${version}",
-  "name": "Flash Carts Overhaul",
+  "name": "Flash Carts Enhanced",
   "description": "The primary goal of this mod is to make minecarts better without breaking your Redstone.",
   "authors": ["Darkgreen_World","Claude Opus 5.5","gjorgdy"],
   "contributors": ["UtmostStar"],
