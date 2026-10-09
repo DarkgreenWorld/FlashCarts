@@ -4,14 +4,14 @@
 
 [![Modrinth](https://img.shields.io/badge/Published%20on-Modrinth-1bd96a?logo=modrinth&logoColor=bluegreen)](https://modrinth.com/mod/flash-carts-enhanced) 
 [![CurseForge](https://img.shields.io/badge/Published%20on-CurseForge-f16436?logo=curseforge&logoColor=orange)](https://www.curseforge.com/minecraft/mc-mods/flash-carts-enhanced/) 
-[![GitHub](https://img.shields.io/badge/%E2%80%8B-GitHub-gray?logo=github&logoColor=black&labelColor=white)](https://github.com/DarkgreenWorld/FlashCarts)
+[![GitHub](https://img.shields.io/badge/GitHub-gray?logo=github&logoColor=black&labelColor=white)](https://github.com/DarkgreenWorld/FlashCarts)
 
 Requires <img alt="Fabric API icon" src="https://cdn.modrinth.com/data/P7dR8mSH/icon.png" width="20" height="20"> [Fabric API](https://www.curseforge.com/minecraft/mc-mods/fabric-api)
 
 **The Link of Original Flash Carts**
 
 [![Modrinth](https://img.shields.io/badge/Flash%20Carts-Modrinth-1bd96a?logo=modrinth&logoColor=bluegreen)](https://modrinth.com/mod/flash-carts) 
-[![GitHub](https://img.shields.io/badge/%E2%80%8B-GitHub-gray?logo=github\&logoColor=black\&labelColor=white)](https://github.com/gjorgdy/FlashCarts)
+[![GitHub](https://img.shields.io/badge/GitHub-gray?logo=github&logoColor=black&labelColor=white)](https://github.com/gjorgdy/FlashCarts)
 
 ## About
 
